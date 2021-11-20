@@ -35,20 +35,17 @@ float posX[30] = {0,0,0,0,0}, posY[30] = {0,-1,-2,-3,-4};
 
 
 void initGL() {
-	
    glClearColor(0.4f, 0.4f, 0.4f, 0.4f); 		       // Seta a cor de fundo
    glClearDepth(1.0f);                                 // Seta o tamanho do background
    glEnable(GL_DEPTH_TEST);  			               // Enable depth testing for z-culling
    glDepthFunc(GL_LEQUAL);    						   // Set the type of depth-test
    glShadeModel(GL_SMOOTH);   						   // Enable smooth shading
    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);  // Nice perspective corrections
-
 }
  
    
 
 void grid(float gridX,float gridY) {
-	
 	gridX = -29;
  	gridY = 30;
  	
@@ -285,7 +282,7 @@ void drawFood() {
 	glPushMatrix();
 	glTranslated(foodX + 1, foodY - 2 , -90.0f); 
 	glRotated(a,0,0,1);
-	glScalef (1.0, 0.75, 1.0);
+	glScalef (1.1, 1.1, 1.0);
 	glutSolidSphere(1,100,7);
 	glPopMatrix();
 	glRectf(foodX,foodY,foodX+1,foodY+1);
@@ -350,6 +347,8 @@ void snake() {
 		if(snake_lenght > MAX)
 			snake_lenght = MAX;
 		food = true;
+		PlaySound("eat-music.wav", NULL, SND_FILENAME | SND_LOOP);
+		PlaySound("base-music.wav", NULL, SND_ASYNC | SND_LOOP);
 	}
 	
 	for(int j = 1;j < snake_lenght;j++){ // Caso a cobra colida gerar gameover
@@ -367,6 +366,7 @@ void display() {
 	glutSwapBuffers();
 	
 	if(gameOver){
+		PlaySound("game-over-music.wav", NULL, SND_FILENAME | SND_LOOP);
 		char _score[10];
 		itoa(score,_score,10);
 		char text[50] = "Pontos coletados: ";
@@ -375,8 +375,6 @@ void display() {
 		exit(0);
 	}
 }
-
-
 
 void reshape(GLsizei width, GLsizei height) {  
    if (height == 0) height = 1;        					//Não deixa dividir por 0        
@@ -393,11 +391,9 @@ void reshape(GLsizei width, GLsizei height) {
 void timer_callback(int){
 	glutPostRedisplay();
 	glutTimerFunc(1000/FPS,timer_callback,0);
-
 }
 
 void keyboard_callback(int key,int,int){
-	
 	switch(key){
 		case GLUT_KEY_UP:
 			if(sDirection != DOWN)
@@ -431,8 +427,8 @@ int main(int argc, char** argv) {
    glutTimerFunc(0,timer_callback,0);
    glutSpecialFunc(keyboard_callback);     		// Register callback handler for window re-size event
    initGL();                       				// Our own OpenGL initialization
+   PlaySound("base-music.wav", NULL, SND_ASYNC | SND_FILENAME | SND_LOOP);
    glutMainLoop();                 				// Enter the infinite event-processing loop
-   
    return 0;
    
 }
