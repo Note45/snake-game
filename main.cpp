@@ -20,7 +20,7 @@
 #define RIGHT 2
 #define LEFT -2
 
-#define MAX 60
+#define MAX 9999
 #define FPS 15
 
 
@@ -150,7 +150,7 @@ void grid(float gridX,float gridY) {
 	glutSolidCone(1.0,1.0,20,1);
 	glPopMatrix();
 	
-//Pilastras-------------------------
+	//Pilastras-------------------------
 	glLoadIdentity();                 
 	glTranslatef(20, -20, -88.0f); 
  						  
@@ -303,7 +303,7 @@ void snake() {
 		gameOver = true; //Gera a mensagem de game over
 	}
 	
-	if(posX[0] == foodX && posY[0] == foodY){ // Conferir a colisão
+	if(posX[0] == foodX && posY[0] == foodY){ // Conferir a colisão com comida
 		score++;
 		snake_lenght++;
 		if(snake_lenght > MAX)
@@ -375,7 +375,6 @@ void keyboard_callback(int key,int,int){
 	}
 }
 
-
 int main(int argc, char** argv) {
    glutInit(&argc, argv);            			// Initialize GLUT
    glutInitDisplayMode(GLUT_DOUBLE); 			// Enable double buffered mode
@@ -390,5 +389,4 @@ int main(int argc, char** argv) {
    PlaySound("base-music.wav", NULL, SND_ASYNC | SND_FILENAME | SND_LOOP);
    glutMainLoop();                 				// Enter the infinite event-processing loop
    return 0;
-   
 }
