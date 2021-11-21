@@ -13,6 +13,7 @@
 #include <GL/gl.h>
 #include <GL/glut.h>  
 #include <stdlib.h>
+#include <stdio.h>
 #include <ctime>
  
 #define UP 1
@@ -78,7 +79,7 @@ void grid(float gridX,float gridY) {
 		glColor3f(1, 0, 0);
 		glRotatef (0.0, 50.0, 50.0, 1.0);
 		glPushMatrix();
-		glScalef (1.0, 1.0, 1.0);
+		glScalef (1.0, 1.0, 5.0);
 		glutSolidCube (1.0);
 		glPopMatrix();
 
@@ -93,7 +94,7 @@ void grid(float gridX,float gridY) {
 		glColor3f(1, 0, 0);
 		glRotatef (0.0, 50.0, 50.0, 1.0);
 		glPushMatrix();
-		glScalef (1.0, 1.0, 1.0);
+		glScalef (1.0, 1.0, 5.0);
 		glutSolidCube (1.0);
 		glPopMatrix();
 	
@@ -107,7 +108,7 @@ void grid(float gridX,float gridY) {
 		glColor3f(1, 0, 0);
 		glRotatef (0.0, 50.0, 50.0, 1.0);
 		glPushMatrix();
-		glScalef (1.0, 1.0, 1.0);
+		glScalef (1.0, 1.0, 5.0);
 		glutSolidCube(1.0);
 		glPopMatrix();
 
@@ -121,7 +122,7 @@ void grid(float gridX,float gridY) {
 		glColor3f(1, 0, 0);
 		glRotatef (0.0, 50.0, 50.0, 1.0);
 		glPushMatrix();
-		glScalef (1.0, 1.0, 1.0);
+		glScalef (1.0, 1.0, 5.0);
 		glutSolidCube (1.0);
 		glPopMatrix();
 			
@@ -135,7 +136,7 @@ void grid(float gridX,float gridY) {
 	glColor3f(1.0, 0.0, 0.0);
 	glRotatef (0.0, 50.0, 50.0, 1.0);
 	glPushMatrix();
-	glScalef (2.0, 2.0, 1.0);
+	glScalef (2.0, 2.0, 5.0);
 	glutSolidCube (1.0);
 	glPopMatrix();
 	
@@ -146,7 +147,7 @@ void grid(float gridX,float gridY) {
 	glColor3f(0.7, 0.7, 0.0);
 	glRotatef (0.0, 50.0, 50.0, 1.0);
 	glPushMatrix();
-	glScalef (1.0, 1.0, 1.0);
+	glScalef (1.0, 1.0, 3.0);
 	glutSolidCone(1.0,1.0,20,1);
 	glPopMatrix();
 	
@@ -157,7 +158,7 @@ void grid(float gridX,float gridY) {
 	glColor3f(0.6, 0.6, 0.0);
 	glRotatef (0.0, 50.0, 50.0, 1.0);
 	glPushMatrix();
-	glScalef (2.0, 3.0, 1.0);
+	glScalef (2.0, 2.0, 5.0);
 	glutSolidCube (1.0);
 	glPopMatrix();
 //---------------------------------
@@ -167,7 +168,7 @@ void grid(float gridX,float gridY) {
 	glColor3f(0.8, 1.6, 0.5);
 	glRotatef (0.0, 50.0, 50.0, 1.0);
 	glPushMatrix();
-	glScalef (2.0, 3.0, 1.0);
+	glScalef (2.0, 3.0, 5.0);
 	glutSolidCube (1.0);
 	glPopMatrix();
 //---------------------------------
@@ -200,7 +201,6 @@ void grid(float gridX,float gridY) {
 	glScalef (2.0, 3.0, 1.0);
 	glutSolidCube(1.0);
 	glPopMatrix();
-
 //---------------------------------
 	glLoadIdentity();                 
 	glTranslatef(10, 5, -88.0f); 
@@ -211,7 +211,6 @@ void grid(float gridX,float gridY) {
 	glScalef (2.0, 3.0, 1.0);
 	glutSolidCube(1.0);
 	glPopMatrix();
-
 //---------------------------------
 	glLoadIdentity();                 
 	glTranslatef(5, 15, -88.0f); 
@@ -228,8 +227,8 @@ void grid(float gridX,float gridY) {
 }
 
 void random(int &x,int &y){
-	int _maxX = 40-2;
-	int _maxY = 40-2;
+	int _maxX = 30-2;
+	int _maxY = 30-2;
 	int _min = -25;
 	srand(time(NULL));
 	x = _min + rand() % (_maxX - _min);
@@ -249,12 +248,11 @@ void drawFood() {
 	glLoadIdentity();     	
 	glColor3f(1.0,1.0,0.0);
 	glPushMatrix();
-	glTranslated(foodX + 1, foodY - 2 , -90.0f); 
-	glRotated(a,0,0,1);
-	glScalef (1.1, 1.2, 1.0);
+	glTranslated(foodX + 2, foodY - 3, -90.0f); 
+	glScalef (0.9, 0.9, 0.9);
 	glutSolidSphere(1,100,7);
 	glPopMatrix();
-	glRectf(foodX,foodY,foodX+1,foodY+1);
+	glRectf(foodX,foodY,foodX+4,foodY+4);	
 }
 
 void snake() {
@@ -299,11 +297,18 @@ void snake() {
 		glRectd(posX[i],posY[i],posX[i]+1,posY[i]+1);
 	}
 	
-	if(posX[0] == 30 || posY[0] == 32||posX[0] == -30||posY[0] == -27||(posX[0] == 20 && posY[0] == -20)||(posX[0] == 19 && posY[0] == 7)||(posX[0] == -13 && posY[0] == 9)||(posX[0] == -24 && posY[0] == -13)||(posX[0] == 4 && posY[0] == 28)){
+	//Checa colisão nos obstaculos	
+	if((posX[0] == 30 || posY[0] == 32) ||
+      (posX[0] == -30 || posY[0] == -27) ||
+      (posX[0] == 18 && posY[0] == -18) ||
+	  (posX[0] == 19 && posY[0] == 7) ||
+	  (posX[0] == -13 && posY[0] == 9) || 
+	  (posX[0] == -24 && posY[0] == -13) ||
+	  (posX[0] == 4 && posY[0] == 28)) {
 		gameOver = true; //Gera a mensagem de game over
 	}
 	
-	if(posX[0] == foodX && posY[0] == foodY){ // Conferir a colisão com comida
+	if(abs(posX[0] - foodX) <= 1.0 && abs(posY[0] - foodY) <= 1.0){ // Conferir a colisão com comida
 		score++;
 		snake_lenght++;
 		if(snake_lenght > MAX)
@@ -345,7 +350,7 @@ void reshape(GLsizei width, GLsizei height) {
    glLoadIdentity();             						//Reseta
    gluPerspective(45.0f, aspect, 1.5f, 100.0f);
    gluLookAt(0,0,1,
-   	   	   	 0,0.05,0,    	  
+   	   	   	 0,-0.030,0,      
 			 0,1,0);
 }
 

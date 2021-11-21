@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Layout>
 	<Files>
-		<File Name="main.cpp" Top="Yes" Tabpos="1" TopLine="290">
-			<Cursor Line="153" Column="2"/>
+		<File Name="main.cpp" Top="Yes" Tabpos="1" TopLine="188">
+			<Cursor Line="223" Column="16"/>
+			<Selection Line="215" Column="1"/>
 		</File>
 	</Files>
 </Layout>
